@@ -1,10 +1,8 @@
 const HeaderSection = ({ points = 0, best = 0 }) => (
   <header className="flex flex-col antialiased text-center gap-5">
-    <h1 className="text-3xl">Leonardo Müller's Odin Memory Game</h1>
+    <h1 className="text-3xl">GitGud Memory Game</h1>
     <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:px-5">
-      <p>
-        Get points by clicking images, but don't click the same image twice.
-      </p>
+      <p>Get points by clicking gifs, but don't click the same gif twice.</p>
       <p>
         Current score: {points} - Best score: {best}
       </p>

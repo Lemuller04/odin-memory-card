@@ -11,7 +11,7 @@ Click on GIF cards to earn points—but don’t click the same one twice! Each c
 Check it out here: [GitGud Memory Game](https://gitgud-memory-game.netlify.app/)
 
 ## Preview
-[](./public/preview.png)
+[!](./public/preview.png)
 
 ## Tech Stack
 

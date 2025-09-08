@@ -4,40 +4,30 @@ import HeaderSection from "./components/HeaderSection.jsx";
 import CardsSection from "./components/CardsSection.jsx";
 import FooterSection from "./components/FooterSection.jsx";
 
-// TEMP FOR TESTING, WILL FETCH FROM GIPHY LATER
-import gif0 from "./assets/gifs/Action Adventure Indie Game GIF.gif";
-import gif1 from "./assets/gifs/Activate Hollow Knight GIF by Xbox.gif";
-import gif2 from "./assets/gifs/Crash Insect GIF by Xbox.gif";
-import gif3 from "./assets/gifs/Flash Insect GIF by Xbox.gif";
-import gif4 from "./assets/gifs/Going Up Hollow Knight GIF by Xbox.gif";
-import gif5 from "./assets/gifs/Hollow Knight Indie Game GIF.gif";
-import gif6 from "./assets/gifs/Hollow Knight Jump GIF by Xbox.gif";
-import gif7 from "./assets/gifs/Hollow Knight Princess GIF by Xbox.gif";
-import gif8 from "./assets/gifs/Loop Travel GIF by Xbox.gif";
-import gif9 from "./assets/gifs/Pucker Up Kiss Me GIF by Xbox.gif";
-import gif10 from "./assets/gifs/Reveal Insect GIF by Xbox.gif";
-import gif11 from "./assets/gifs/Video Game Fantasy GIF.gif";
-
-const gifUrls = [
-  gif0,
-  gif1,
-  gif2,
-  gif3,
-  gif4,
-  gif5,
-  gif6,
-  gif7,
-  gif8,
-  gif9,
-  gif10,
-  gif11,
+const gifIds = [
+  "DeSZZmHos0XvOGN117",
+  "3wthwRK00REzScZnEs",
+  "9PalpZKlDt5iNfnFXT",
+  "bGJWrE1qNek88Jg0xb",
+  "hiDIKdYU5o6gC7042Z",
+  "mIg1Ik3KYxy0WylN3W",
+  "seP7yUAPbxsCJaNEal",
+  "aW3hGTIxHhcOQ5sW2V",
+  "Z5yJ9iryTtZr2bjsXV",
+  "81qWBngrrA15zFOnXz",
+  "pkQgx00egUQ9m58UgV",
+  "OmgPMW73sBjupoKFch",
 ];
+
+const urlStart = "https://api.giphy.com/v1/gifs/";
+const urlEnd = "?api_key=7ZaylFM0cQcYpqefKhgjRUWXCJeV7TcI";
 
 function App() {
   const [cards, setCards] = useState([]);
   const [clickedCards, setClickedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
   const shuffleCards = () => setCards((prev) => shuffleArray(prev));
@@ -60,13 +50,39 @@ function App() {
   };
 
   useEffect(() => {
-    setCards(shuffleArray(gifUrls));
+    const storedBest = localStorage.getItem("bestScore");
+    if (storedBest) setBestScore(Number(storedBest));
+
+    const fetchAllGifs = async () => {
+      setLoading(true);
+      try {
+        const urls = gifIds.map((id) => `${urlStart}${id}${urlEnd}`);
+        const responses = await Promise.all(urls.map((url) => fetch(url)));
+        const data = await Promise.all(responses.map((res) => res.json()));
+        const srcs = data.map((gif) => gif.data.images.original.url);
+        setCards(shuffleArray(srcs));
+        setLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch GIFs: ", error);
+        setLoading(false);
+      }
+    };
+
+    fetchAllGifs();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("bestScore", bestScore);
+  }, [bestScore]);
 
   return (
     <div className="bg-sky-50 dark:bg-slate-900 text-zinc-950 dark:text-zinc-300 py-5 text-lg">
       <HeaderSection points={score} best={bestScore} />
-      <CardsSection cards={cards} onCardClick={handleCardClick} />
+      {loading ? (
+        <p className="size-full">Loading GIFs...</p>
+      ) : (
+        <CardsSection cards={cards} onCardClick={handleCardClick} />
+      )}
       <FooterSection />
     </div>
   );

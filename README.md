@@ -1,12 +1,34 @@
-# React + Vite
+# GitGud Memory Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A memory card game built with React, styled using Tailwind CSS, and powered by the Giphy API. This project was created as part of [The Odin Project](https://theodinproject.com) React curriculum to practice hooks, state management, and API integration.
 
-Currently, two official plugins are available:
+## How It Works
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Click on GIF cards to earn points—but don’t click the same one twice! Each correct click increases your score and reshuffles the cards. If you click a duplicate, your score resets. Your best score is saved locally so you can keep improving.
 
-## Expanding the ESLint configuration
+## Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Check it out here: GitGud Memory Game (SOON)
+
+## Tech Stack
+
+- React: UI and component logic;
+- Tailwind CSS: Styling and responsive layout;
+- Vite: Fast development environment;
+- Giphy API: Fetching dynamic GIF content
+
+## Features
+
+- Card shuffling after every click;
+- Score tracking and best score persistence;
+- GIFs fetched from Giphy API;
+- Responsive design with Tailwind;
+- Dark mode support (if implemented);
+
+## Learning Goals
+
+- Practice useEffect for side effects and data fetching;
+- Manage state with useState;
+- Handle user interaction and conditional rendering;
+- Work with external APIs and asynchronous logic;
+- Build a responsive, styled UI using Tailwind;

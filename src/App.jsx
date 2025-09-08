@@ -30,16 +30,15 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
-  const shuffleCards = () => setCards((prev) => shuffleArray(prev));
 
-  const handleCardClick = (cardUrl) => {
-    if (clickedCards.includes(cardUrl)) {
+  const handleCardClick = (id) => {
+    if (clickedCards.includes(id)) {
       setScore(0);
       setClickedCards([]);
     } else {
       const newScore = score + 1;
       setScore(newScore);
-      setClickedCards([...clickedCards, cardUrl]);
+      setClickedCards([...clickedCards, id]);
 
       if (newScore > bestScore) {
         setBestScore(newScore);
@@ -59,7 +58,11 @@ function App() {
         const urls = gifIds.map((id) => `${urlStart}${id}${urlEnd}`);
         const responses = await Promise.all(urls.map((url) => fetch(url)));
         const data = await Promise.all(responses.map((res) => res.json()));
-        const srcs = data.map((gif) => gif.data.images.original.url);
+        const srcs = data.map((gif) => ({
+          id: gif.data.id,
+          url: gif.data.images.original.url,
+          title: gif.data.title,
+        }));
         setCards(shuffleArray(srcs));
         setLoading(false);
       } catch (error) {
@@ -76,7 +79,7 @@ function App() {
   }, [bestScore]);
 
   return (
-    <div className="bg-sky-50 dark:bg-slate-900 text-zinc-950 dark:text-zinc-300 py-5 text-lg">
+    <div className="bg-sky-50 dark:bg-slate-900 text-zinc-950 dark:text-zinc-300 py-5 text-lg size-full flex flex-col flex-1">
       <HeaderSection points={score} best={bestScore} />
       {loading ? (
         <p className="size-full">Loading GIFs...</p>

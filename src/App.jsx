@@ -4,6 +4,34 @@ import HeaderSection from "./components/HeaderSection.jsx";
 import CardsSection from "./components/CardsSection.jsx";
 import FooterSection from "./components/FooterSection.jsx";
 
+import gif1 from "./assets/gifs/Action Adventure Indie Game GIF.gif";
+import gif2 from "./assets/gifs/Activate Hollow Knight GIF by Xbox.gif";
+import gif3 from "./assets/gifs/Crash Insect GIF by Xbox.gif";
+import gif4 from "./assets/gifs/Flash Insect GIF by Xbox.gif";
+import gif5 from "./assets/gifs/Going Up Hollow Knight GIF by Xbox.gif";
+import gif6 from "./assets/gifs/Hollow Knight Indie Game GIF.gif";
+import gif7 from "./assets/gifs/Hollow Knight Jump GIF by Xbox.gif";
+import gif8 from "./assets/gifs/Hollow Knight Princess GIF by Xbox.gif";
+import gif9 from "./assets/gifs/Loop Travel GIF by Xbox.gif";
+import gif10 from "./assets/gifs/Pucker Up Kiss Me GIF by Xbox.gif";
+import gif11 from "./assets/gifs/Reveal Insect GIF by Xbox.gif";
+import gif12 from "./assets/gifs/Video Game Fantasy GIF.gif";
+
+const localGifs = [
+  { id: "local1", url: gif1, title: "Local GIF 1" },
+  { id: "local2", url: gif2, title: "Local GIF 2" },
+  { id: "local3", url: gif3, title: "Local GIF 3" },
+  { id: "local4", url: gif4, title: "Local GIF 4" },
+  { id: "local5", url: gif5, title: "Local GIF 5" },
+  { id: "local6", url: gif6, title: "Local GIF 6" },
+  { id: "local7", url: gif7, title: "Local GIF 7" },
+  { id: "local8", url: gif8, title: "Local GIF 8" },
+  { id: "local9", url: gif9, title: "Local GIF 9" },
+  { id: "local10", url: gif10, title: "Local GIF 10" },
+  { id: "local11", url: gif11, title: "Local GIF 11" },
+  { id: "local12", url: gif12, title: "Local GIF 12" },
+];
+
 const gifIds = [
   "DeSZZmHos0XvOGN117",
   "3wthwRK00REzScZnEs",
@@ -67,6 +95,7 @@ function App() {
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch GIFs: ", error);
+        setCards(shuffleArray(localGifs));
         setLoading(false);
       }
     };

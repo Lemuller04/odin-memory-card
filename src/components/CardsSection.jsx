@@ -8,7 +8,7 @@ const CardsSection = ({ cards, onCardClick }) => (
     "
   >
     {cards.map((card) => (
-      <Card key={card.id} content={card} onClick={() => onCardClick(card.id)} />
+      <Card key={card.id} card={card} onClick={() => onCardClick(card.id)} />
     ))}
   </main>
 );
